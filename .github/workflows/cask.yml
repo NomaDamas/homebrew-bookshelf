@@ -37,9 +37,11 @@ jobs:
           persist-credentials: false
       - name: Load the checked-out cask
         run: |
-          brew update
+          brew --version
           brew tap nomadamas/bookshelf "$GITHUB_WORKSPACE"
-          brew trust --cask nomadamas/bookshelf/bookshelf
+          if brew command trust >/dev/null 2>&1; then
+            brew trust --cask nomadamas/bookshelf/bookshelf
+          fi
       - name: Check style and metadata
         run: |
           git diff --check
