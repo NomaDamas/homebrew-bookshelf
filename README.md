@@ -49,17 +49,21 @@ It points to immutable assets in
 Livecheck follows published numeric version tags, including developer previews.
 It reports available versions; a reviewed cask update makes them installable here.
 
-After publishing a new upstream version, use Homebrew's update command from a
-maintainer checkout (replace the example version with the published version):
+After publishing a new upstream version:
 
-```sh
-brew bump-cask-pr --version 0.1.1 --no-fork --no-browse nomadamas/bookshelf/bookshelf
-```
+1. Create a branch in this tap. Update the cask's version and both architecture
+   checksums from the published `.dmg.sha256` files and JSON manifests.
+2. For an intentionally supported preview, update the exact version in
+   [`github_prerelease_allowlist.json`](audit_exceptions/github_prerelease_allowlist.json).
+   The current exception covers only `0.1.0`; it does not allow every future preview
+   or skip draft, download, checksum, or installation checks. Remove the entry when
+   the tap moves to a non-prerelease version.
+3. Keep the preview/signing caveat accurate. Remove the signing warning only after
+   the assets are actually Developer ID signed and notarized.
+4. Run the checks below, open a pull request, and merge after both CI jobs pass.
 
-Review both architecture checksums against the published `.dmg.sha256` files and
-JSON manifests. Keep the preview caveat until the assets are actually Developer ID
-signed and notarized. Test and merge the resulting pull request. Never overwrite
-an existing release asset to change what an already-published checksum installs.
+Never overwrite an existing release asset to change what an already-published
+checksum installs.
 
 ## Validate changes
 
