@@ -1,4 +1,4 @@
-name: Validate Bookshelf cask
+name: Validate Bookside cask
 
 on:
   pull_request:
@@ -38,39 +38,39 @@ jobs:
       - name: Load the checked-out cask
         run: |
           brew --version
-          brew tap nomadamas/bookshelf "$GITHUB_WORKSPACE"
+          brew tap nomadamas/bookside "$GITHUB_WORKSPACE"
           if brew command trust >/dev/null 2>&1; then
-            brew trust --cask nomadamas/bookshelf/bookshelf
+            brew trust --cask nomadamas/bookside/bookside
           fi
       - name: Check style and metadata
         run: |
           git diff --check
-          brew style --cask nomadamas/bookshelf/bookshelf
-          brew audit --cask --online nomadamas/bookshelf/bookshelf
+          brew style --cask nomadamas/bookside/bookside
+          brew audit --cask --online nomadamas/bookside/bookside
       - name: Install and exercise the bundled CLI
         env:
-          BOOKSHELF_DATA_DIR: ${{ runner.temp }}/bookshelf-data
+          BOOKSIDE_DATA_DIR: ${{ runner.temp }}/bookside-data
         run: |
-          mkdir -p "$RUNNER_TEMP/Applications" "$BOOKSHELF_DATA_DIR"
+          mkdir -p "$RUNNER_TEMP/Applications" "$BOOKSIDE_DATA_DIR"
           brew install --cask --no-ask --require-sha \
-            --appdir="$RUNNER_TEMP/Applications" nomadamas/bookshelf/bookshelf
-          codesign --verify --deep --strict "$RUNNER_TEMP/Applications/Bookshelf.app"
-          bookshelf-cli --version
-          bookshelf-cli doctor > "$RUNNER_TEMP/bookshelf-doctor.json"
+            --appdir="$RUNNER_TEMP/Applications" nomadamas/bookside/bookside
+          codesign --verify --deep --strict "$RUNNER_TEMP/Applications/Bookside.app"
+          bookside-cli --version
+          bookside-cli doctor > "$RUNNER_TEMP/bookside-doctor.json"
           python3 - <<'PY'
           import json, os, plistlib
           from pathlib import Path
           root = Path(os.environ["RUNNER_TEMP"])
-          info = plistlib.loads((root / "Applications/Bookshelf.app/Contents/Info.plist").read_bytes())
-          doctor = json.loads((root / "bookshelf-doctor.json").read_text())
+          info = plistlib.loads((root / "Applications/Bookside.app/Contents/Info.plist").read_bytes())
+          doctor = json.loads((root / "bookside-doctor.json").read_text())
           assert doctor["version"] == info["CFBundleShortVersionString"]
-          assert doctor["bundle_identifier"] == info["CFBundleIdentifier"] == "org.nomadamas.bookshelf"
+          assert doctor["bundle_identifier"] == info["CFBundleIdentifier"] == "org.nomadamas.bookside"
           print("Installed app and linked CLI metadata agree.")
           PY
       - name: Verify uninstall preserves external data
         run: |
-          test -d "$RUNNER_TEMP/bookshelf-data"
-          brew uninstall --cask nomadamas/bookshelf/bookshelf
-          test ! -e "$RUNNER_TEMP/Applications/Bookshelf.app"
-          test ! -L "$(brew --prefix)/bin/bookshelf-cli"
-          test -d "$RUNNER_TEMP/bookshelf-data"
+          test -d "$RUNNER_TEMP/bookside-data"
+          brew uninstall --cask nomadamas/bookside/bookside
+          test ! -e "$RUNNER_TEMP/Applications/Bookside.app"
+          test ! -L "$(brew --prefix)/bin/bookside-cli"
+          test -d "$RUNNER_TEMP/bookside-data"
