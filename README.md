@@ -15,7 +15,10 @@ that supports your macOS.
 **The current version is an ad-hoc signed developer preview, not notarized by Apple.**
 Homebrew installation preserves macOS quarantine. See the
 [first-launch guide](https://github.com/NomaDamas/bookside/blob/main/docs/01-getting-started.md#install-the-developer-preview)
-if macOS blocks opening it. OCR engines are optional, separate installations.
+if macOS blocks opening it. Until macOS allows the app, `bookside-cli` can wait at a
+Gatekeeper prompt instead of returning
+([NomaDamas/bookside#24](https://github.com/NomaDamas/bookside/issues/24)).
+OCR engines are optional, separate installations.
 
 ## Coming from Bookshelf
 
@@ -25,13 +28,22 @@ Bookshelf and run:
 
 ```sh
 brew update
-brew upgrade --cask bookshelf
+brew trust --cask nomadamas/bookshelf/bookside
+brew migrate --cask bookshelf
+brew upgrade --cask bookside
 ```
 
-Homebrew follows the rename: it removes `Bookshelf.app` and the `bookshelf-cli`
-link, then installs `Bookside.app` and `bookside-cli`. Bookside reads your existing
-library at `~/Library/Application Support/Bookshelf`; nothing is moved or deleted.
-The old tap name keeps working, so you do not need to re-tap.
+Homebrew trusts casks by name, so the earlier trust for `bookshelf` does not cover
+`bookside`; without the `trust` step, `brew upgrade` and `brew list --cask` stop with
+an untrusted-tap error. `migrate` moves the installation record to the new name.
+Skipping it still upgrades the app but leaves a stale `bookshelf` record that
+`brew list` shows as a second `bookside`.
+
+The upgrade removes `Bookshelf.app` and the `bookshelf-cli` link, then installs
+`Bookside.app` and `bookside-cli`. Bookside reads your existing library at
+`~/Library/Application Support/Bookshelf`; nothing is moved or deleted. Your local
+tap keeps the name `nomadamas/bookshelf` and follows this repository, so you do not
+need to re-tap.
 
 ## Update and remove
 
