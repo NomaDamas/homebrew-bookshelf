@@ -1,7 +1,10 @@
 # Bookshelf Homebrew tap
 
-Install [Bookshelf](https://github.com/NomaDamas/bookshelf), a native macOS PDF reader
+Install [Bookshelf](https://github.com/NomaDamas/bookside), a native macOS PDF reader
 with per-book notes, local OCR, and read-only MCP access.
+
+The project is now named Bookside. This cask still installs the Bookshelf 0.1.0
+developer preview; the `bookside` cask arrives with the first Bookside release.
 
 ```sh
 brew install --cask nomadamas/bookshelf/bookshelf
@@ -14,7 +17,7 @@ that supports your macOS.
 
 **The current version is an ad-hoc signed developer preview, not notarized by Apple.**
 Homebrew installation preserves macOS quarantine. See the
-[first-launch guide](https://github.com/NomaDamas/bookshelf/blob/main/docs/01-getting-started.md#install-the-developer-preview)
+[first-launch guide](https://github.com/NomaDamas/bookside/blob/main/docs/01-getting-started.md#install-the-developer-preview)
 if macOS blocks opening it. OCR engines are optional, separate installations.
 
 ## Update and remove
@@ -39,13 +42,13 @@ notes or reading history.
 If you already installed the app manually, quit it and check the installation
 location before switching. Homebrew refuses to overwrite a different existing
 app. Keep your old copy until the new installation works; see the
-[installation guide](https://github.com/NomaDamas/bookshelf/blob/main/docs/01-getting-started.md).
+[installation guide](https://github.com/NomaDamas/bookside/blob/main/docs/01-getting-started.md).
 
 ## Maintain the cask
 
 [`Casks/bookshelf.rb`](Casks/bookshelf.rb) is the distribution record for this tap.
 It points to immutable assets in
-[Bookshelf Releases](https://github.com/NomaDamas/bookshelf/releases).
+[Bookshelf Releases](https://github.com/NomaDamas/bookside/releases).
 Livecheck follows published numeric version tags, including developer previews.
 It reports available versions; a reviewed cask update makes them installable here.
 
@@ -84,7 +87,7 @@ Newer Homebrew versions require trust before loading a third-party cask for audi
 Use `brew trust --cask nomadamas/bookshelf/bookshelf` to trust this cask specifically.
 The fully qualified install command above establishes that same scoped trust.
 
-Report app problems in [Bookshelf issues](https://github.com/NomaDamas/bookshelf/issues)
+Report app problems in [Bookshelf issues](https://github.com/NomaDamas/bookside/issues)
 and packaging problems in [this tap's issues](https://github.com/NomaDamas/homebrew-bookshelf/issues).
 The tap is maintained by NomaDamas and is separate from Homebrew's official cask repository.
 
