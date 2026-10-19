@@ -1,12 +1,12 @@
-cask "bookshelf" do
+cask "bookside" do
   arch arm: "arm64", intel: "x86_64"
 
-  version "0.1.0"
-  sha256 arm:   "5eb66b44ad16cdb8678cec9dd59ec1e7d13052671b5689cc4cd21aadc5382163",
-         intel: "8d89adb33088c03c92b1f9bf8781aa341c83f3b6f18aa34ced73a46e34c10889"
+  version "0.2.0"
+  sha256 arm:   "3813ebbd2e7c4e393496cec5c4096254bb189453439f7612add25dc6d6c20fec",
+         intel: "445609a292a9c7b8d2df60c809f54b16b213ba28f95ae3966dde2bd9cdac0bf4"
 
-  url "https://github.com/NomaDamas/bookside/releases/download/v#{version}/Bookshelf-#{version}-macos-#{arch}.dmg"
-  name "Bookshelf"
+  url "https://github.com/NomaDamas/bookside/releases/download/v#{version}/Bookside-#{version}-macos-#{arch}.dmg"
+  name "Bookside"
   desc "Native PDF reader with per-book notes, local OCR, and read-only MCP access"
   homepage "https://github.com/NomaDamas/bookside"
 
@@ -25,11 +25,11 @@ cask "bookshelf" do
 
   depends_on macos: :sonoma
 
-  app "Bookshelf.app"
-  binary "#{appdir}/Bookshelf.app/Contents/MacOS/bookshelf-cli"
+  app "Bookside.app"
+  binary "#{appdir}/Bookside.app/Contents/MacOS/bookside-cli"
 
   caveats <<~EOS
-    Bookshelf 0.1.0 is an ad-hoc signed developer preview, not notarized by Apple.
+    Bookside 0.2.0 is an ad-hoc signed developer preview, not notarized by Apple.
     macOS may require first-launch approval in System Settings > Privacy & Security.
     Installation guidance: https://github.com/NomaDamas/bookside/blob/main/docs/01-getting-started.md
     OCR tools are optional and installed separately.
