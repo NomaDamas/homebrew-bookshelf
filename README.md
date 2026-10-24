@@ -83,7 +83,7 @@ After publishing a new upstream version:
    checksums from the published `.dmg.sha256` files and JSON manifests.
 2. For an intentionally supported preview, update the exact version in
    [`github_prerelease_allowlist.json`](audit_exceptions/github_prerelease_allowlist.json).
-   The current exception covers only `0.2.0`; it does not allow every future preview
+   The current exception covers only `0.3.0`; it does not allow every future preview
    or skip draft, download, checksum, or installation checks. Remove the entry when
    the tap moves to a non-prerelease version.
 3. Keep the preview/signing caveat accurate. Remove the signing warning only after

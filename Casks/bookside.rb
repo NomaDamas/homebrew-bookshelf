@@ -1,9 +1,9 @@
 cask "bookside" do
   arch arm: "arm64", intel: "x86_64"
 
-  version "0.2.0"
-  sha256 arm:   "3813ebbd2e7c4e393496cec5c4096254bb189453439f7612add25dc6d6c20fec",
-         intel: "445609a292a9c7b8d2df60c809f54b16b213ba28f95ae3966dde2bd9cdac0bf4"
+  version "0.3.0"
+  sha256 arm:   "aa0b0f37c827acb831289107934d6e665d76534ff23601d8b3111281955fa3a9",
+         intel: "9674b28a19b3c26dbdc50c28392e634912ce98b58613b07f33507c7e75e92466"
 
   url "https://github.com/NomaDamas/bookside/releases/download/v#{version}/Bookside-#{version}-macos-#{arch}.dmg"
   name "Bookside"
@@ -29,7 +29,7 @@ cask "bookside" do
   binary "#{appdir}/Bookside.app/Contents/MacOS/bookside-cli"
 
   caveats <<~EOS
-    Bookside 0.2.0 is an ad-hoc signed developer preview, not notarized by Apple.
+    Bookside 0.3.0 is an ad-hoc signed developer preview, not notarized by Apple.
     macOS may require first-launch approval in System Settings > Privacy & Security.
     Installation guidance: https://github.com/NomaDamas/bookside/blob/main/docs/01-getting-started.md
     OCR tools are optional and installed separately.
